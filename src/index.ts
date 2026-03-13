@@ -131,6 +131,7 @@ export default {
         .card { background: #1e1e1e; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); width: 100%; max-width: 400px; margin: 1rem; box-sizing: border-box; }
         h1 { color: #00d4ff; font-size: 1.2rem; }
         textarea, input { width: 100%; padding: 0.75rem; margin: 0.5rem 0; background: #2c2c2c; border: 1px solid #444; color: #fff; box-sizing: border-box; font-size: 16px; }
+        textarea { min-height: 200px; resize: vertical; }
         button { background: #00d4ff; color: #000; border: none; padding: 0.75rem; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 1rem; }
         .result { margin-top: 1rem; word-break: break-all; font-size: 0.8rem; color: #aaa; }
         a { color: #00d4ff; text-decoration: none; }
@@ -141,7 +142,7 @@ export default {
 <body>
     <div class="card">
         <h1>AES Secret Store</h1>
-        <textarea id="content" placeholder="Enter text to save..." rows="4"></textarea>
+        <textarea id="content" placeholder="Enter text to save..." rows="10"></textarea>
         <input type="password" id="password" placeholder="Password (Random if empty)">
         <button onclick="save()">Save (Expires in 7 days)</button>
         <div id="res" class="result"></div>
