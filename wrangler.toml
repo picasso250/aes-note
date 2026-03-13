@@ -1,0 +1,14 @@
+name = "my-claw-aes-kv"
+main = "src/index.ts"
+compatibility_date = "2024-03-10"
+
+kv_namespaces = [
+  { binding = "AES_KV", id = "656ff15d67314ba0901e39340937fa9d" }
+]
+
+[observability]
+enabled = true
+
+[[routes]]
+pattern = "x.io99.xyz"
+custom_domain = true
