@@ -137,6 +137,10 @@ export default {
         a { color: #00d4ff; text-decoration: none; }
         a:hover { text-decoration: underline; }
         .pw-display { background: #333; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 4px; border: 1px dashed #555; }
+        .link-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-top: 0.5rem; }
+        .link-row a { flex: 1; min-width: 0; }
+        .copy-btn { flex: 0 0 auto; width: auto; padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+        .copy-status { display: block; margin-top: 0.4rem; color: #ddd; }
     </style>
 </head>
 <body>
@@ -174,13 +178,33 @@ export default {
                     if (data.isGenerated) {
                         html += '<div class="pw-display">Generated Password: <b style="color:#00d4ff">' + finalPassword + '</b></div>';
                     }
-                    html += 'Link: <a href="' + link + '" target="_blank">' + link + '</a>';
+                    html += 'Link: <div class="link-row"><a href="' + link + '" target="_blank">' + link + '</a><button class="copy-btn" type="button" data-link="' + link + '" onclick="copyLink(this)">Copy</button></div><span id="copyStatus" class="copy-status"></span>';
                     resDiv.innerHTML = html;
                 } else {
                     resDiv.innerText = 'Error saving: ' + (data.error || 'Unknown error');
                 }
             } catch (e) {
                 resDiv.innerText = 'Error: ' + e.message;
+            }
+        }
+
+        async function copyLink(button) {
+            const link = button.dataset.link;
+            const status = document.getElementById('copyStatus');
+
+            try {
+                await navigator.clipboard.writeText(link);
+                status.innerText = 'Copied.';
+                button.innerText = 'Copied';
+            } catch (e) {
+                const input = document.createElement('input');
+                input.value = link;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                status.innerText = 'Copied.';
+                button.innerText = 'Copied';
             }
         }
     </script>
